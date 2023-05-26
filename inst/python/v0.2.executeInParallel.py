@@ -7,6 +7,7 @@ import optparse
 import multiprocessing
 from multiprocessing import Process, Lock
 import sys
+import subprocess
 
 ################
 # global variables
@@ -19,7 +20,8 @@ lock = Lock();
 def runCommand(c):
     lock.acquire()
     lock.release()
-    os.system(c)
+    # os.system(c)
+    subprocess.run(["/usr/bin/bash", "-c", c])
     return
 
 def runcommands(clist,test,pool_size):

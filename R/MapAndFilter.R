@@ -63,7 +63,7 @@ MapAndFilter <- function(outputDir = 'LRProcessingOutput/', annoGZ = NULL, numTh
   awkScriptDir <- system.file("bash", package = "scisorseqr")
   pyScriptDir <- system.file("python", package = "scisorseqr")
 
-  runCommand <- paste("sh", mainFile, fastqGuide, outputDir, tmpFolder, numThreads,
+  runCommand <- paste("bash", mainFile, fastqGuide, outputDir, tmpFolder, numThreads,
                       seqDir, annoGZ, bamGuide, awkScriptDir, pyScriptDir, genomeVersion)
 
   if(!dir.exists(outputDir)){dir.create(outputDir)}
@@ -77,7 +77,7 @@ MapAndFilter <- function(outputDir = 'LRProcessingOutput/', annoGZ = NULL, numTh
     cageGZ <- cageBed
     polyaGZ <- polyABed
     filterFL_script <- system.file("bash", "cagePolyA.sh", package = "scisorseqr")
-    filterFLcomm <- paste("sh", filterFL_script, "zcat", outputDir,
+    filterFLcomm <- paste("bash", filterFL_script, "zcat", outputDir,
                           cageGZ, polyaGZ, awkScriptDir, cp_distance)
     system(filterFLcomm)
   }

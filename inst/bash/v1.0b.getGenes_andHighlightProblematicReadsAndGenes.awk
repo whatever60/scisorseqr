@@ -4,8 +4,8 @@
 # -v sortedAnno=
 # -v intronGFF=
 # -v feature=
-# -v transIdColumn=
-# -v task=
+# -v transIdColumn=  # 12
+# -v geneIdColumn=  # 10
 
 
 
