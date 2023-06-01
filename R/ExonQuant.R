@@ -26,19 +26,23 @@
 ExonQuant <- function(allInfoFile = 'LongReadInfo/AllInfo_IncompleteReads.gz',
                            groupingFactor = "Celltype",threshold = 10, numThreads = 4) {
 
-  if(!dir.exists('ExonQuantOutput')){dir.create("ExonQuantOutput/")}
-  if(file.exists('ExonQuantOutput/InclusionExclusionCounts.tsv')){
-    file.remove('ExonQuantOutput/InclusionExclusionCounts.tsv')}
+  # if(!dir.exists('ExonQuantOutput')){dir.create("ExonQuantOutput/")}
+  # if(file.exists('ExonQuantOutput/InclusionExclusionCounts.tsv')){
+  #   file.remove('ExonQuantOutput/InclusionExclusionCounts.tsv')}
 
-  R_file <- system.file("RScript", "ExonCounting.R", package = "scisorseqr")
+  # R_file <- system.file("RScript", "ExonCounting.R", package = "scisorseqr")
 
-  countExons <- paste("Rscript", R_file, allInfoFile, groupingFactor, numThreads, threshold)
+  # countExons <- paste("Rscript", R_file, allInfoFile, groupingFactor, numThreads, threshold)
+  # system(countExons)
+
+  # concatComm <- "awk 'FNR==1 && NR!=1{next;}{print}' ExonQuantOutput/PID*.tsv > ExonQuantOutput/InclusionExclusionCounts.tsv"
+  # system(concatComm)
+
+  # rmComm = "rm ExonQuantOutput/PID*.tsv"
+  # system(rmComm)
+
+  py_file <- system.file("python", "ExonCounting.py", package = "scisorseqr")
+  countExons <- paste("python3", py_file, allInfoFile, "-g", groupingFactor, "-p", numThreads, "-t", threshold)
   system(countExons)
-
-  concatComm <- "awk 'FNR==1 && NR!=1{next;}{print}' ExonQuantOutput/PID*.tsv > ExonQuantOutput/InclusionExclusionCounts.tsv"
-  system(concatComm)
-
-  rmComm = "rm ExonQuantOutput/PID*.tsv"
-  system(rmComm)
 
 }
